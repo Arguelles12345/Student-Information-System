@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Info System</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<h1>Student Info System</h1>
+
+<form id="studentForm">
+  <input type="text" id="studentId" placeholder="Student ID (2023-00000)" required>
+  <input type="text" id="name" placeholder="Name" required>
+  <input type="number" id="age" placeholder="Age" required>
+  <input type="text" id="course" placeholder="Course" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="text" id="address" placeholder="Address" required>
+  <input type="text" id="gender" placeholder="Gender" required>
+  <input type="date" id="birthDate" required>
+  <input type="text" id="guardian" placeholder="Guardian" required>
+  <input type="text" id="contactNumber" placeholder="Contact Number" required>
+  <button type="submit">Add Student</button>
+</form>
+<input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
+<div class="table-container">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+<th>Student ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Course</th>
+<th>Email</th>
+<th>Address</th>
+<th>Gender</th>
+<th>Birthdate</th>
+<th>Guardian</th>
+<th>Contact</th>
+<th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="studentTable"></tbody>
+</table>
+</div>
+<div id="idCardModal" class="modal">
+  <div class="card">
+    <h2>🎓 STUDENT ID</h2>
+    <p><strong>ID:</strong> <span id="cardStudentId"></span></p>
+    <p><strong>Name:</strong> <span id="cardName"></span></p>
+    <p><strong>Course:</strong> <span id="cardCourse"></span></p>
+    <p><strong>Email:</strong> <span id="cardEmail"></span></p>
+    <p><strong>Address:</strong> <span id="cardAddress"></span></p>
+    <p><strong>Gender:</strong> <span id="cardGender"></span></p>
+    <p><strong>Birthdate:</strong> <span id="cardBirthDate"></span></p>
+    <p><strong>Guardian:</strong> <span id="cardGuardian"></span></p>
+    <p><strong>Contact:</strong> <span id="cardContact"></span></p>
+
+    <button onclick="closeCard()">Close</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
