@@ -117,12 +117,20 @@ table, form {
   border: 2px solid #ff2e2e;
   box-shadow: 0 0 15px #ff2e2e;
   width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
   text-align: left;
 }
 
 .card h2 {
   text-align: center;
   color: #ff2e2e;
+  margin-top: 0;
+  position: sticky;
+  top: 0;
+  background: #111;
+  padding: 10px 0;
+  border-bottom: 2px solid #ff2e2e;
 }
 
 /* EDIT PAGE FORM */
@@ -183,4 +191,28 @@ table, form {
 /* MAKE TABLE WIDER BUT SCROLLABLE */
 table {
   min-width: 1200px;
+}
+
+/* EDIT FORM SCROLLABLE */
+#editForm {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#editForm::-webkit-scrollbar {
+  width: 8px;
+}
+
+#editForm::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+#editForm::-webkit-scrollbar-thumb {
+  background: #ff2e2e;
+  border-radius: 4px;
+}
+
+#editForm::-webkit-scrollbar-thumb:hover {
+  background: #ff0000;
 }
