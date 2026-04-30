@@ -1,99 +1,177 @@
-/* 🏍️ Motorcycle Theme */
+/* Professional Student Management System */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  font-family: 'Orbitron', Arial, sans-serif;
-  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-  color: #eaeaea;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #2c3e50;
+  min-height: 100vh;
 }
 
 /* HEADER */
 h1 {
   text-align: center;
-  padding: 20px;
-  color: #ff2e2e;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #ff2e2e;
+  padding: 30px 20px;
+  color: #2c3e50;
+  letter-spacing: 1px;
+  font-size: 2.5em;
+  font-weight: 700;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
-/* FORM */
-form {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px;
-  flex-wrap: wrap;
+/* FORM SECTION */
+#studentForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin: 30px auto;
+  padding: 30px;
+  max-width: 1200px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
-form input {
-  padding: 10px;
-  border: 1px solid #444;
-  background: #111;
-  color: #fff;
-  border-radius: 6px;
+#studentForm input {
+  padding: 12px 15px;
+  border: 2px solid #e0e6ed;
+  background: #f8f9fa;
+  color: #2c3e50;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
   outline: none;
 }
 
-form input:focus {
-  border-color: #ff2e2e;
-  box-shadow: 0 0 8px #ff2e2e;
+#studentForm input:focus {
+  border-color: #3498db;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 /* BUTTON */
 button {
-  background: #ff2e2e;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
   border: none;
-  padding: 10px 15px;
+  padding: 12px 24px;
   color: white;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 button:hover {
-  background: #ff0000;
-  box-shadow: 0 0 10px #ff2e2e;
+  background: linear-gradient(135deg, #2980b9 0%, #1f618d 100%);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* FILTER & SEARCH */
+.filter-section {
+  display: flex;
+  gap: 15px;
+  margin: 20px auto;
+  padding: 20px 30px;
+  max-width: 1200px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+}
+
+#search, #courseFilter {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 15px;
+  border: 2px solid #e0e6ed;
+  background: #f8f9fa;
+  color: #2c3e50;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+#search:focus, #courseFilter:focus {
+  border-color: #3498db;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 /* TABLE */
+.table-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  padding: 20px;
+}
+
 table {
-  width: 90%;
-  margin: auto;
+  width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-  background: #111;
-  border-radius: 10px;
-  overflow: hidden;
+  min-width: 1000px;
 }
 
 th {
-  background: #ff2e2e;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
   color: white;
-  padding: 12px;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  border-radius: 8px 8px 0 0;
 }
 
 td {
-  padding: 10px;
-  border-bottom: 1px solid #333;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ecf0f1;
+  font-size: 14px;
 }
 
 tr:hover {
-  background: #1f1f1f;
+  background: #f8f9fa;
+}
+
+tr:last-child td {
+  border-bottom: none;
 }
 
 /* ACTION BUTTONS */
 td button {
-  margin: 2px;
-  padding: 5px 8px;
+  margin: 0 4px;
+  padding: 8px 16px;
   font-size: 12px;
+  background: #27ae60;
 }
 
-/* GLOW EFFECT */
-table, form {
-  box-shadow: 0 0 15px rgba(255, 46, 46, 0.2);
+td button:hover {
+  background: #229954;
+}
+
+td button:nth-child(2) {
+  background: #e74c3c;
+}
+
+td button:nth-child(2):hover {
+  background: #c0392b;
 }
 
 /* MODAL */
@@ -104,100 +182,72 @@ table, form {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
 }
 
-/* ID CARD */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* CARD */
 .card {
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
-  border: 2px solid #ff2e2e;
-  box-shadow: 0 0 15px #ff2e2e;
-  width: 300px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 450px;
   max-height: 80vh;
   overflow-y: auto;
-  text-align: left;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .card h2 {
-  text-align: center;
-  color: #ff2e2e;
-  margin-top: 0;
-  position: sticky;
-  top: 0;
-  background: #111;
-  padding: 10px 0;
-  border-bottom: 2px solid #ff2e2e;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 15px;
+  sticky: top;
+  background: white;
 }
 
-/* EDIT PAGE FORM */
-.form-container {
-  width: 400px;
-  margin: 30px auto;
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 46, 46, 0.3);
-  display: flex;
-  flex-direction: column;
-}
-
-.form-container label {
-  margin-top: 10px;
-  color: #ff2e2e;
+.card p {
+  margin: 12px 0;
   font-size: 14px;
+  line-height: 1.6;
 }
 
-.form-container input {
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #444;
-  background: #000;
-  color: white;
-  border-radius: 6px;
-  outline: none;
+.card p strong {
+  color: #3498db;
 }
 
-.form-container input:focus {
-  border-color: #ff2e2e;
-  box-shadow: 0 0 8px #ff2e2e;
-}
-
-.form-container button {
-  margin-top: 20px;
-  padding: 10px;
-  background: #ff2e2e;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.form-container button:hover {
-  background: #ff0000;
-  box-shadow: 0 0 10px #ff2e2e;
-}
-
-/* TABLE WRAPPER */
-.table-container {
+.card button {
   width: 100%;
-  overflow-x: auto;
-}
-
-/* MAKE TABLE WIDER BUT SCROLLABLE */
-table {
-  min-width: 1200px;
+  margin-top: 20px;
 }
 
 /* EDIT FORM SCROLLABLE */
 #editForm {
-  max-height: 70vh;
+  max-height: 65vh;
   overflow-y: auto;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 
 #editForm::-webkit-scrollbar {
@@ -205,14 +255,57 @@ table {
 }
 
 #editForm::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #ecf0f1;
+  border-radius: 4px;
 }
 
 #editForm::-webkit-scrollbar-thumb {
-  background: #ff2e2e;
+  background: #3498db;
   border-radius: 4px;
 }
 
 #editForm::-webkit-scrollbar-thumb:hover {
-  background: #ff0000;
+  background: #2980b9;
+}
+
+#editForm label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+#editForm input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e0e6ed;
+  background: #f8f9fa;
+  color: #2c3e50;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+#editForm input:focus {
+  border-color: #3498db;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+#editForm button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+}
+
+#editForm button:nth-child(n+16) {
+  background: #95a5a6;
+  margin-right: 5px;
+}
+
+#editForm button:nth-child(n+16):hover {
+  background: #7f8c8d;
 }

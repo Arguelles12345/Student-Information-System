@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Student Info System</title>
+  <title>Student Information Management System</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1>Student Info System</h1>
+<h1>📚 Student Information Management System</h1>
 
 <form id="studentForm">
   <input type="text" id="studentId" placeholder="Student ID (2023-00000)" required>
@@ -20,11 +19,11 @@
   <input type="date" id="birthDate" required>
   <input type="text" id="guardian" placeholder="Guardian" required>
   <input type="text" id="contactNumber" placeholder="Contact Number" required>
-  <button type="submit">Add Student</button>
+  <button type="submit" style="grid-column: span 2;">Add Student</button>
 </form>
-<div style="display: flex; gap: 10px; margin: 10px 0;">
-  <input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
-  <select id="courseFilter" onchange="filterByCourse()" style="padding: 5px 10px;">
+<div class="filter-section">
+  <input type="text" id="search" placeholder="🔍 Search student..." onkeyup="searchStudent()">
+  <select id="courseFilter" onchange="filterByCourse()">
     <option value="">All Courses</option>
   </select>
 </div>
