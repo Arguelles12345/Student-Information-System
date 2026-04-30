@@ -1,20 +1,34 @@
-const API = "http://localhost:3000/students";
+const STORAGE_KEY = "students";
 
 const table = document.getElementById("studentTable");
 const form = document.getElementById("studentForm");
+let allStudents = [];
+
+// Initialize from localStorage
+function initStudents() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    allStudents = JSON.parse(stored);
+  } else {
+    allStudents = [];
+  }
+  loadStudents();
+  updateCourseFilter();
+}
+
+function saveToStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(allStudents));
+}
 
 async function loadStudents() {
-  const res = await fetch(API);
-  const data = await res.json();
-
   table.innerHTML = "";
 
-  data.forEach(student => {
+  allStudents.forEach((student, index) => {
     const row = `
 <tr>
-  <td>${student.id}</td>
+  <td>${index + 1}</td>
   <td>${student.studentId}</td>
-  <td onclick='showCard(${JSON.stringify(student)})' style="cursor:pointer;color:#ff2e2e;">
+  <td onclick='showCard(${JSON.stringify(student).replace(/'/g, "&apos;")})' style="cursor:pointer;color:#ff2e2e;">
     ${student.name}
   </td>
   <td>${student.age}</td>
@@ -26,8 +40,8 @@ async function loadStudents() {
   <td>${student.guardian}</td>
   <td>${student.contactNumber}</td>
   <td>
-    <button onclick="goToEdit(${student.id})">Edit</button>
-    <button onclick="deleteStudent(${student.id})">Delete</button>
+    <button onclick="openEditModal(${index})">Edit</button>
+    <button onclick="deleteStudent(${index})">Delete</button>
   </td>
 </tr>
 `;
@@ -35,44 +49,13 @@ async function loadStudents() {
   });
 }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
- 
-
-  let base64 = "";
-
-  if (file) {
-    const reader = new FileReader();
-
-    reader.onload = async function () {
-      base64 = reader.result;
-      await saveStudent(base64);
-    };
-
-    reader.readAsDataURL(file);
-  } else {
-    await saveStudent("");
+async function deleteStudent(index) {
+  if (confirm("Are you sure you want to delete this student?")) {
+    allStudents.splice(index, 1);
+    saveToStorage();
+    loadStudents();
+    updateCourseFilter();
   }
-});
-
-async function deleteStudent(id) {
-  await fetch(`${API}/${id}`, { method: "DELETE" });
-  loadStudents();
-}
-
-async function editStudent(id) {
-  const name = prompt("Enter new name:");
-  const age = prompt("Enter new age:");
-  const course = prompt("Enter new course:");
-
-  await fetch(`${API}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, age, course }),
-  });
-
-  loadStudents();
 }
 function showCard(student) {
   document.getElementById("cardStudentId").innerText = student.studentId;
@@ -118,16 +101,85 @@ form.addEventListener("submit", async (e) => {
     contactNumber: document.getElementById("contactNumber").value,
   };
 
-  await fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(student),
-  });
-
+  allStudents.push(student);
+  saveToStorage();
   form.reset();
   loadStudents();
+  updateCourseFilter();
+  alert("Student added successfully!");
 });
-function goToEdit(id) {
-  window.location.href = `edit.html?id=${id}`;
+function openEditModal(index) {
+  const student = allStudents[index];
+  document.getElementById("editId").value = index;
+  document.getElementById("editStudentId").value = student.studentId;
+  document.getElementById("editName").value = student.name;
+  document.getElementById("editAge").value = student.age;
+  document.getElementById("editCourse").value = student.course;
+  document.getElementById("editEmail").value = student.email;
+  document.getElementById("editAddress").value = student.address;
+  document.getElementById("editGender").value = student.gender;
+  document.getElementById("editBirthDate").value = student.birthDate;
+  document.getElementById("editGuardian").value = student.guardian;
+  document.getElementById("editContactNumber").value = student.contactNumber;
+  document.getElementById("editModal").style.display = "flex";
 }
-loadStudents();
+
+function closeEditModal() {
+  document.getElementById("editModal").style.display = "none";
+}
+
+document.getElementById("editForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const index = document.getElementById("editId").value;
+  const updated = {
+    studentId: document.getElementById("editStudentId").value,
+    name: document.getElementById("editName").value,
+    age: document.getElementById("editAge").value,
+    course: document.getElementById("editCourse").value,
+    email: document.getElementById("editEmail").value,
+    address: document.getElementById("editAddress").value,
+    gender: document.getElementById("editGender").value,
+    birthDate: document.getElementById("editBirthDate").value,
+    guardian: document.getElementById("editGuardian").value,
+    contactNumber: document.getElementById("editContactNumber").value,
+  };
+  allStudents[index] = updated;
+  saveToStorage();
+  closeEditModal();
+  loadStudents();
+  updateCourseFilter();
+  alert("Student updated successfully!");
+});
+
+function updateCourseFilter() {
+  const courseFilter = document.getElementById("courseFilter");
+  const courses = [...new Set(allStudents.map(s => s.course).filter(c => c))];
+  
+  const currentValue = courseFilter.value;
+  courseFilter.innerHTML = '<option value="">All Courses</option>';
+  
+  courses.forEach(course => {
+    const option = document.createElement("option");
+    option.value = course;
+    option.textContent = course;
+    courseFilter.appendChild(option);
+  });
+  
+  courseFilter.value = currentValue;
+}
+
+function filterByCourse() {
+  const selectedCourse = document.getElementById("courseFilter").value;
+  const rows = document.querySelectorAll("#studentTable tr");
+
+  rows.forEach(row => {
+    if (!selectedCourse) {
+      row.style.display = "";
+    } else {
+      const courseCell = row.cells[4];
+      row.style.display = courseCell.textContent === selectedCourse ? "" : "none";
+    }
+  });
+}
+
+initStudents();

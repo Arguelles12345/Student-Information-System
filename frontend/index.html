@@ -22,7 +22,12 @@
   <input type="text" id="contactNumber" placeholder="Contact Number" required>
   <button type="submit">Add Student</button>
 </form>
-<input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
+<div style="display: flex; gap: 10px; margin: 10px 0;">
+  <input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
+  <select id="courseFilter" onchange="filterByCourse()" style="padding: 5px 10px;">
+    <option value="">All Courses</option>
+  </select>
+</div>
 <div class="table-container">
 <table>
   <thead>
@@ -58,6 +63,37 @@
     <p><strong>Contact:</strong> <span id="cardContact"></span></p>
 
     <button onclick="closeCard()">Close</button>
+  </div>
+</div>
+
+<div id="editModal" class="modal">
+  <div class="card">
+    <h2>✏️ EDIT STUDENT</h2>
+    <form id="editForm" style="display: flex; flex-direction: column; gap: 10px;">
+      <input type="hidden" id="editId">
+      <label>Student ID</label>
+      <input id="editStudentId" placeholder="2023-00000" required>
+      <label>Name</label>
+      <input id="editName" placeholder="Full Name" required>
+      <label>Age</label>
+      <input id="editAge" type="number" required>
+      <label>Course</label>
+      <input id="editCourse" placeholder="Course" required>
+      <label>Email</label>
+      <input id="editEmail" type="email" required>
+      <label>Address</label>
+      <input id="editAddress" placeholder="Address" required>
+      <label>Gender</label>
+      <input id="editGender" placeholder="Gender" required>
+      <label>Birthdate</label>
+      <input id="editBirthDate" type="date" required>
+      <label>Guardian</label>
+      <input id="editGuardian" placeholder="Guardian" required>
+      <label>Contact Number</label>
+      <input id="editContactNumber" placeholder="Contact Number" required>
+      <button type="submit">Save Changes</button>
+      <button type="button" onclick="closeEditModal()">Cancel</button>
+    </form>
   </div>
 </div>
 <script src="script.js"></script>
