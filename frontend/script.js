@@ -14,10 +14,24 @@ function initStudents() {
   }
   loadStudents();
   updateCourseFilter();
+  updateStats();
 }
 
 function saveToStorage() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(allStudents));
+}
+
+function updateStats() {
+  const totalStudents = allStudents.length;
+  const courses = [...new Set(allStudents.map(s => s.course).filter(c => c))];
+  const totalCourses = courses.length;
+  const averageAge = totalStudents > 0 ? Math.round(allStudents.reduce((sum, s) => sum + parseInt(s.age || 0), 0) / totalStudents) : 0;
+  const totalRecords = allStudents.length;
+
+  document.getElementById("totalStudents").innerText = totalStudents;
+  document.getElementById("totalCourses").innerText = totalCourses;
+  document.getElementById("averageAge").innerText = averageAge;
+  document.getElementById("totalRecords").innerText = totalRecords;
 }
 
 async function loadStudents() {
@@ -28,20 +42,15 @@ async function loadStudents() {
 <tr>
   <td>${index + 1}</td>
   <td>${student.studentId}</td>
-  <td onclick='showCard(${JSON.stringify(student).replace(/'/g, "&apos;")})' style="cursor:pointer;color:#ff2e2e;">
+  <td onclick='showCard(${JSON.stringify(student).replace(/'/g, "&apos;")})' style="cursor:pointer;color:#667eea;font-weight:600;">
     ${student.name}
   </td>
-  <td>${student.age}</td>
   <td>${student.course}</td>
   <td>${student.email}</td>
-  <td>${student.address}</td>
-  <td>${student.gender}</td>
-  <td>${student.birthDate}</td>
-  <td>${student.guardian}</td>
   <td>${student.contactNumber}</td>
   <td>
-    <button onclick="openEditModal(${index})">Edit</button>
-    <button onclick="deleteStudent(${index})">Delete</button>
+    <button class="edit" onclick="openEditModal(${index})">Edit</button>
+    <button class="delete" onclick="deleteStudent(${index})">Delete</button>
   </td>
 </tr>
 `;
@@ -55,24 +64,61 @@ async function deleteStudent(index) {
     saveToStorage();
     loadStudents();
     updateCourseFilter();
+    updateStats();
   }
 }
 function showCard(student) {
-  document.getElementById("cardStudentId").innerText = student.studentId;
-  document.getElementById("cardName").innerText = student.name;
-  document.getElementById("cardCourse").innerText = student.course;
-  document.getElementById("cardEmail").innerText = student.email;
-  document.getElementById("cardAddress").innerText = student.address;
-  document.getElementById("cardGender").innerText = student.gender;
-  document.getElementById("cardBirthDate").innerText = student.birthDate;
-  document.getElementById("cardGuardian").innerText = student.guardian;
-  document.getElementById("cardContact").innerText = student.contactNumber;
-
-  document.getElementById("idCardModal").style.display = "flex";
+  const cardHtml = `
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px;">
+      <h2 style="margin-bottom: 5px;">🎓 ${student.name}</h2>
+      <p style="opacity: 0.9; font-size: 14px;">Student ID: ${student.studentId}</p>
+    </div>
+    <div style="display: grid; gap: 15px;">
+      <div>
+        <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Course</label>
+        <p>${student.course}</p>
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Email</label>
+        <p>${student.email}</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div>
+          <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Age</label>
+          <p>${student.age}</p>
+        </div>
+        <div>
+          <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Gender</label>
+          <p>${student.gender}</p>
+        </div>
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Address</label>
+        <p>${student.address}</p>
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Birth Date</label>
+        <p>${student.birthDate}</p>
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Guardian</label>
+        <p>${student.guardian}</p>
+      </div>
+      <div>
+        <label style="font-size: 12px; color: #95a5a6; font-weight: 600;">Contact Number</label>
+        <p>${student.contactNumber}</p>
+      </div>
+    </div>
+  `;
+  
+  const modal = document.getElementById("idCardModal");
+  const card = modal.querySelector(".card");
+  card.innerHTML = cardHtml + '<button class="btn-primary" onclick="closeCard()" style="width: 100%; margin-top: 20px;">Close</button>';
+  modal.classList.add("show");
 }
 
 function closeCard() {
-  document.getElementById("idCardModal").style.display = "none";
+  document.getElementById("idCardModal").classList.remove("show");
 }
 
 function searchStudent() {
@@ -106,7 +152,8 @@ form.addEventListener("submit", async (e) => {
   form.reset();
   loadStudents();
   updateCourseFilter();
-  alert("Student added successfully!");
+  updateStats();
+  alert("✅ Student added successfully!");
 });
 function openEditModal(index) {
   const student = allStudents[index];
@@ -121,11 +168,11 @@ function openEditModal(index) {
   document.getElementById("editBirthDate").value = student.birthDate;
   document.getElementById("editGuardian").value = student.guardian;
   document.getElementById("editContactNumber").value = student.contactNumber;
-  document.getElementById("editModal").style.display = "flex";
+  document.getElementById("editModal").classList.add("show");
 }
 
 function closeEditModal() {
-  document.getElementById("editModal").style.display = "none";
+  document.getElementById("editModal").classList.remove("show");
 }
 
 document.getElementById("editForm").addEventListener("submit", async (e) => {
@@ -148,7 +195,8 @@ document.getElementById("editForm").addEventListener("submit", async (e) => {
   closeEditModal();
   loadStudents();
   updateCourseFilter();
-  alert("Student updated successfully!");
+  updateStats();
+  alert("✅ Student updated successfully!");
 });
 
 function updateCourseFilter() {
@@ -176,10 +224,23 @@ function filterByCourse() {
     if (!selectedCourse) {
       row.style.display = "";
     } else {
-      const courseCell = row.cells[4];
+      const courseCell = row.cells[3];
       row.style.display = courseCell.textContent === selectedCourse ? "" : "none";
     }
   });
 }
+
+// Close modal when clicking outside
+document.addEventListener("click", (e) => {
+  const cardModal = document.getElementById("idCardModal");
+  const editModal = document.getElementById("editModal");
+  
+  if (e.target === cardModal) {
+    cardModal.classList.remove("show");
+  }
+  if (e.target === editModal) {
+    editModal.classList.remove("show");
+  }
+});
 
 initStudents();

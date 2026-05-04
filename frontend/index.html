@@ -1,97 +1,227 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Student Information Management System</title>
+  <title>Student Hub - Management System</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <h2>📚 StudentHub</h2>
+    </div>
+    <nav class="menu">
+      <div class="menu-item active">
+        <span class="menu-icon">🏠</span>
+        <span>Dashboard</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-icon">👨‍🎓</span>
+        <span>Students</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-icon">📖</span>
+        <span>Courses</span>
+      </div>
+      <div class="menu-item">
+        <span class="menu-icon">📊</span>
+        <span>Reports</span>
+      </div>
+    </nav>
+    <div class="menu-other">
+      <div class="menu-item">
+        <span class="menu-icon">👤</span>
+        <span>Profile</span>
+      </div>
+    </div>
+  </div>
 
-<h1>📚 Student Information Management System</h1>
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="🔍 Search student..." onkeyup="searchStudent()">
+      </div>
+      <div class="user-menu">
+        <span>👤 Admin</span>
+      </div>
+    </div>
 
-<form id="studentForm">
-  <input type="text" id="studentId" placeholder="Student ID (2023-00000)" required>
-  <input type="text" id="name" placeholder="Name" required>
-  <input type="number" id="age" placeholder="Age" required>
-  <input type="text" id="course" placeholder="Course" required>
-  <input type="email" id="email" placeholder="Email" required>
-  <input type="text" id="address" placeholder="Address" required>
-  <input type="text" id="gender" placeholder="Gender" required>
-  <input type="date" id="birthDate" required>
-  <input type="text" id="guardian" placeholder="Guardian" required>
-  <input type="text" id="contactNumber" placeholder="Contact Number" required>
-  <button type="submit" style="grid-column: span 2;">Add Student</button>
-</form>
-<div class="filter-section">
-  <input type="text" id="search" placeholder="🔍 Search student..." onkeyup="searchStudent()">
-  <select id="courseFilter" onchange="filterByCourse()">
-    <option value="">All Courses</option>
-  </select>
-</div>
-<div class="table-container">
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-<th>Student ID</th>
-<th>Name</th>
-<th>Age</th>
-<th>Course</th>
-<th>Email</th>
-<th>Address</th>
-<th>Gender</th>
-<th>Birthdate</th>
-<th>Guardian</th>
-<th>Contact</th>
-<th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="studentTable"></tbody>
-</table>
+    <!-- STATS CARDS -->
+    <div class="stats-container">
+      <div class="stat-card blue">
+        <div class="stat-content">
+          <div class="stat-value" id="totalStudents">0</div>
+          <div class="stat-label">Total Students</div>
+        </div>
+        <div class="stat-icon">📚</div>
+      </div>
+      <div class="stat-card yellow">
+        <div class="stat-content">
+          <div class="stat-value" id="totalCourses">0</div>
+          <div class="stat-label">Courses</div>
+        </div>
+        <div class="stat-icon">📖</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-content">
+          <div class="stat-value" id="averageAge">0</div>
+          <div class="stat-label">Avg Age</div>
+        </div>
+        <div class="stat-icon">📊</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-content">
+          <div class="stat-value" id="totalRecords">0</div>
+          <div class="stat-label">Records</div>
+        </div>
+        <div class="stat-icon">✓</div>
+      </div>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+      <!-- LEFT SECTION - FORM -->
+      <div class="form-section">
+        <div class="section-header">
+          <h3>➕ Add New Student</h3>
+        </div>
+        <form id="studentForm">
+          <div class="form-group">
+            <label>Student ID</label>
+            <input type="text" id="studentId" placeholder="2023-00000" required>
+          </div>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter full name" required>
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="age" placeholder="Age" required>
+          </div>
+          <div class="form-group">
+            <label>Course</label>
+            <input type="text" id="course" placeholder="Course name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Email address" required>
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <input type="text" id="address" placeholder="Address" required>
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="gender" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Birth Date</label>
+            <input type="date" id="birthDate" required>
+          </div>
+          <div class="form-group">
+            <label>Guardian</label>
+            <input type="text" id="guardian" placeholder="Guardian name" required>
+          </div>
+          <div class="form-group">
+            <label>Contact Number</label>
+            <input type="text" id="contactNumber" placeholder="Contact number" required>
+          </div>
+          <button type="submit" class="btn-primary">Add Student</button>
+        </form>
+      </div>
+
+      <!-- RIGHT SECTION - LIST -->
+      <div class="list-section">
+        <div class="section-header">
+          <h3>📋 Student List</h3>
+          <select id="courseFilter" onchange="filterByCourse()" class="filter-select">
+            <option value="">All Courses</option>
+          </select>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="idCardModal" class="modal">
-  <div class="card">
-    <h2>🎓 STUDENT ID</h2>
-    <p><strong>ID:</strong> <span id="cardStudentId"></span></p>
-    <p><strong>Name:</strong> <span id="cardName"></span></p>
-    <p><strong>Course:</strong> <span id="cardCourse"></span></p>
-    <p><strong>Email:</strong> <span id="cardEmail"></span></p>
-    <p><strong>Address:</strong> <span id="cardAddress"></span></p>
-    <p><strong>Gender:</strong> <span id="cardGender"></span></p>
-    <p><strong>Birthdate:</strong> <span id="cardBirthDate"></span></p>
-    <p><strong>Guardian:</strong> <span id="cardGuardian"></span></p>
-    <p><strong>Contact:</strong> <span id="cardContact"></span></p>
-
-    <button onclick="closeCard()">Close</button>
-  </div>
+  <div class="card"></div>
 </div>
 
 <div id="editModal" class="modal">
   <div class="card">
     <h2>✏️ EDIT STUDENT</h2>
-    <form id="editForm" style="display: flex; flex-direction: column; gap: 10px;">
+    <form id="editForm">
       <input type="hidden" id="editId">
-      <label>Student ID</label>
-      <input id="editStudentId" placeholder="2023-00000" required>
-      <label>Name</label>
-      <input id="editName" placeholder="Full Name" required>
-      <label>Age</label>
-      <input id="editAge" type="number" required>
-      <label>Course</label>
-      <input id="editCourse" placeholder="Course" required>
-      <label>Email</label>
-      <input id="editEmail" type="email" required>
-      <label>Address</label>
-      <input id="editAddress" placeholder="Address" required>
-      <label>Gender</label>
-      <input id="editGender" placeholder="Gender" required>
-      <label>Birthdate</label>
-      <input id="editBirthDate" type="date" required>
-      <label>Guardian</label>
-      <input id="editGuardian" placeholder="Guardian" required>
-      <label>Contact Number</label>
-      <input id="editContactNumber" placeholder="Contact Number" required>
-      <button type="submit">Save Changes</button>
-      <button type="button" onclick="closeEditModal()">Cancel</button>
+      <div class="form-group">
+        <label>Student ID</label>
+        <input id="editStudentId" placeholder="2023-00000" required>
+      </div>
+      <div class="form-group">
+        <label>Name</label>
+        <input id="editName" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <label>Age</label>
+        <input id="editAge" type="number" required>
+      </div>
+      <div class="form-group">
+        <label>Course</label>
+        <input id="editCourse" placeholder="Course" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input id="editEmail" type="email" required>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input id="editAddress" placeholder="Address" required>
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="editGender" required>
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Birthdate</label>
+        <input id="editBirthDate" type="date" required>
+      </div>
+      <div class="form-group">
+        <label>Guardian</label>
+        <input id="editGuardian" placeholder="Guardian" required>
+      </div>
+      <div class="form-group">
+        <label>Contact Number</label>
+        <input id="editContactNumber" placeholder="Contact Number" required>
+      </div>
+      <button type="submit" class="btn-primary">Save Changes</button>
+      <button type="button" onclick="closeEditModal()" class="btn-cancel">Cancel</button>
     </form>
   </div>
 </div>
