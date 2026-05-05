@@ -12,25 +12,25 @@
       <h2>📚 StudentHub</h2>
     </div>
     <nav class="menu">
-      <div class="menu-item active">
+      <div class="menu-item active" onclick="navigateTo('dashboard')">
         <span class="menu-icon">🏠</span>
         <span>Dashboard</span>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('students')">
         <span class="menu-icon">👨‍🎓</span>
         <span>Students</span>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('courses')">
         <span class="menu-icon">📖</span>
         <span>Courses</span>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('reports')">
         <span class="menu-icon">📊</span>
         <span>Reports</span>
       </div>
     </nav>
     <div class="menu-other">
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('profile')">
         <span class="menu-icon">👤</span>
         <span>Profile</span>
       </div>
@@ -49,118 +49,182 @@
       </div>
     </div>
 
-    <!-- STATS CARDS -->
-    <div class="stats-container">
-      <div class="stat-card blue">
-        <div class="stat-content">
-          <div class="stat-value" id="totalStudents">0</div>
-          <div class="stat-label">Total Students</div>
+    <!-- PAGES CONTAINER -->
+    <div class="pages-container">
+      <!-- DASHBOARD PAGE -->
+      <div id="dashboardPage" class="page active">
+        <!-- STATS CARDS -->
+        <div class="stats-container">
+          <div class="stat-card blue">
+            <div class="stat-content">
+              <div class="stat-value" id="totalStudents">0</div>
+              <div class="stat-label">Total Students</div>
+            </div>
+            <div class="stat-icon">📚</div>
+          </div>
+          <div class="stat-card yellow">
+            <div class="stat-content">
+              <div class="stat-value" id="totalCourses">0</div>
+              <div class="stat-label">Courses</div>
+            </div>
+            <div class="stat-icon">📖</div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-content">
+              <div class="stat-value" id="averageAge">0</div>
+              <div class="stat-label">Avg Age</div>
+            </div>
+            <div class="stat-icon">📊</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-content">
+              <div class="stat-value" id="totalRecords">0</div>
+              <div class="stat-label">Records</div>
+            </div>
+            <div class="stat-icon">✓</div>
+          </div>
         </div>
-        <div class="stat-icon">📚</div>
-      </div>
-      <div class="stat-card yellow">
-        <div class="stat-content">
-          <div class="stat-value" id="totalCourses">0</div>
-          <div class="stat-label">Courses</div>
-        </div>
-        <div class="stat-icon">📖</div>
-      </div>
-      <div class="stat-card purple">
-        <div class="stat-content">
-          <div class="stat-value" id="averageAge">0</div>
-          <div class="stat-label">Avg Age</div>
-        </div>
-        <div class="stat-icon">📊</div>
-      </div>
-      <div class="stat-card green">
-        <div class="stat-content">
-          <div class="stat-value" id="totalRecords">0</div>
-          <div class="stat-label">Records</div>
-        </div>
-        <div class="stat-icon">✓</div>
-      </div>
-    </div>
 
-    <!-- CONTENT AREA -->
-    <div class="content-area">
-      <!-- LEFT SECTION - FORM -->
-      <div class="form-section">
-        <div class="section-header">
-          <h3>➕ Add New Student</h3>
+        <!-- DASHBOARD CONTENT AREA -->
+        <div class="content-area dashboard-content">
+          <!-- LIST SECTION AT TOP -->
+          <div class="list-section">
+            <div class="section-header">
+              <h3>📋 Student List</h3>
+              <select id="courseFilter" onchange="filterByCourse()" class="filter-select">
+                <option value="">All Courses</option>
+              </select>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- FORM SECTION AT BOTTOM -->
+          <div class="form-section">
+            <div class="section-header">
+              <h3>➕ Add New Student</h3>
+            </div>
+            <form id="studentForm">
+              <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" id="studentId" placeholder="2023-00000" required>
+              </div>
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Enter full name" required>
+              </div>
+              <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="age" placeholder="Age" required>
+              </div>
+              <div class="form-group">
+                <label>Course</label>
+                <input type="text" id="course" placeholder="Course name" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Email address" required>
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" id="address" placeholder="Address" required>
+              </div>
+              <div class="form-group">
+                <label>Gender</label>
+                <select id="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Birth Date</label>
+                <input type="date" id="birthDate" required>
+              </div>
+              <div class="form-group">
+                <label>Guardian</label>
+                <input type="text" id="guardian" placeholder="Guardian name" required>
+              </div>
+              <div class="form-group">
+                <label>Contact Number</label>
+                <input type="text" id="contactNumber" placeholder="Contact number" required>
+              </div>
+              <button type="submit" class="btn-primary">Add Student</button>
+            </form>
+          </div>
         </div>
-        <form id="studentForm">
-          <div class="form-group">
-            <label>Student ID</label>
-            <input type="text" id="studentId" placeholder="2023-00000" required>
-          </div>
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="name" placeholder="Enter full name" required>
-          </div>
-          <div class="form-group">
-            <label>Age</label>
-            <input type="number" id="age" placeholder="Age" required>
-          </div>
-          <div class="form-group">
-            <label>Course</label>
-            <input type="text" id="course" placeholder="Course name" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="email" placeholder="Email address" required>
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <input type="text" id="address" placeholder="Address" required>
-          </div>
-          <div class="form-group">
-            <label>Gender</label>
-            <select id="gender" required>
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Birth Date</label>
-            <input type="date" id="birthDate" required>
-          </div>
-          <div class="form-group">
-            <label>Guardian</label>
-            <input type="text" id="guardian" placeholder="Guardian name" required>
-          </div>
-          <div class="form-group">
-            <label>Contact Number</label>
-            <input type="text" id="contactNumber" placeholder="Contact number" required>
-          </div>
-          <button type="submit" class="btn-primary">Add Student</button>
-        </form>
       </div>
 
-      <!-- RIGHT SECTION - LIST -->
-      <div class="list-section">
-        <div class="section-header">
-          <h3>📋 Student List</h3>
-          <select id="courseFilter" onchange="filterByCourse()" class="filter-select">
-            <option value="">All Courses</option>
-          </select>
+      <!-- STUDENTS PAGE -->
+      <div id="studentsPage" class="page">
+        <div class="content-area students-content">
+          <div class="list-section full-width">
+            <div class="section-header">
+              <h3>📋 Student List</h3>
+              <select id="courseFilter2" onchange="filterByCourse()" class="filter-select">
+                <option value="">All Courses</option>
+              </select>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentTable2"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Course</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="studentTable"></tbody>
-          </table>
+      </div>
+
+      <!-- PLACEHOLDER PAGES -->
+      <div id="coursesPage" class="page">
+        <div class="content-area">
+          <div class="placeholder-section">
+            <h3>📖 Courses</h3>
+            <p>Courses page coming soon</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="reportsPage" class="page">
+        <div class="content-area">
+          <div class="placeholder-section">
+            <h3>📊 Reports</h3>
+            <p>Reports page coming soon</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="profilePage" class="page">
+        <div class="content-area">
+          <div class="placeholder-section">
+            <h3>👤 Profile</h3>
+            <p>Profile page coming soon</p>
+          </div>
         </div>
       </div>
     </div>
