@@ -17,6 +17,12 @@ function navigateTo(page) {
     pageEl.classList.add("active");
   }
   
+  // Hide add student form when navigating away or when using Dashboard link
+  const formSection = document.getElementById("studentFormSection");
+  if (formSection) {
+    formSection.classList.add("hidden");
+  }
+  
   // Update menu active state
   document.querySelectorAll(".menu-item").forEach(item => {
     item.classList.remove("active");
@@ -39,6 +45,19 @@ function navigateTo(page) {
   });
   
   currentPage = page;
+}
+
+function showAddStudentForm() {
+  navigateTo('dashboard');
+  const formSection = document.getElementById("studentFormSection");
+  if (formSection) {
+    formSection.classList.remove("hidden");
+  }
+  document.querySelectorAll(".menu-item").forEach(item => item.classList.remove("active"));
+  const addItem = document.getElementById("menuAddStudent");
+  if (addItem) {
+    addItem.classList.add("active");
+  }
 }
 
 // Initialize from localStorage

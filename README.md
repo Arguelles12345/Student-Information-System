@@ -9,7 +9,8 @@ A modern student dashboard with multi-page navigation, featuring a comprehensive
 ## ✨ Dashboard Highlights
 
 - ✅ **Multi-page navigation** with clickable sidebar menu
-- ✅ **Dashboard page** with stats cards, student list, and add student form
+- ✅ **Sidebar Add Student button** that shows the fill-up form when clicked
+- ✅ **Dashboard page** with stats cards and student list
 - ✅ **Dedicated Students page** for full student management
 - ✅ **Search bar** with real-time filtering across all pages
 - ✅ **Course dropdown** to filter students by course
@@ -18,10 +19,10 @@ A modern student dashboard with multi-page navigation, featuring a comprehensive
 
 ## 📋 What the App Includes
 
-- **Dashboard page** with navigation, metrics cards, student list, and add student form at bottom
+- **Dashboard page** with navigation, metrics cards, and student list
 - **Students page** with full-width student table and management tools
-- **Sidebar navigation** for easy page switching (Dashboard, Students, Courses, Reports, Profile)
-- **Student entry form** integrated into the dashboard
+- **Sidebar navigation** with an Add Student item to reveal the form
+- **Student entry form** hidden until Add Student is clicked
 - **Student table** showing all students with search and filter capabilities
 - **Search + course filter** working together across pages
 - **Edit / delete actions** for each student
@@ -83,8 +84,8 @@ student-info-system/
 - Other pages (Courses, Reports, Profile) are placeholders for future features
 
 ### Add a Student
-1. Navigate to the **Dashboard** page
-2. Scroll to the bottom to find the **Add New Student** form
+1. Click **Add Student** in the sidebar menu
+2. The fill-up form will appear on the Dashboard page
 3. Fill in all required student fields
 4. Click **Add Student** to save
 5. The student appears in both the dashboard list and students page immediately

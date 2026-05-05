@@ -20,6 +20,10 @@
         <span class="menu-icon">👨‍🎓</span>
         <span>Students</span>
       </div>
+      <div class="menu-item" id="menuAddStudent" onclick="showAddStudentForm()">
+        <span class="menu-icon">📝</span>
+        <span>Add Student</span>
+      </div>
       <div class="menu-item" onclick="navigateTo('courses')">
         <span class="menu-icon">📖</span>
         <span>Courses</span>
@@ -114,7 +118,7 @@
           </div>
 
           <!-- FORM SECTION AT BOTTOM -->
-          <div class="form-section">
+          <div id="studentFormSection" class="form-section hidden">
             <div class="section-header">
               <h3>➕ Add New Student</h3>
             </div>
