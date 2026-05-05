@@ -4,23 +4,26 @@
 
 # 📚 Student Information Management System
 
-A modern student dashboard with a clean layout, separated student form, and unified student list area. The app is built with **NestJS** backend and **vanilla JavaScript/HTML/CSS** frontend, using **localStorage** for browser-side persistence.
+A modern student dashboard with multi-page navigation, featuring a comprehensive student management interface. The app is built with **NestJS** backend and **vanilla JavaScript/HTML/CSS** frontend, using **localStorage** for browser-side persistence.
 
 ## ✨ Dashboard Highlights
 
-- ✅ **Dashboard layout** with sidebar navigation and summary cards
-- ✅ **Separated student form** and student list for better workflow
-- ✅ **Search bar** with real-time filtering
+- ✅ **Multi-page navigation** with clickable sidebar menu
+- ✅ **Dashboard page** with stats cards, student list, and add student form
+- ✅ **Dedicated Students page** for full student management
+- ✅ **Search bar** with real-time filtering across all pages
 - ✅ **Course dropdown** to filter students by course
 - ✅ **Unified table view** for all students and actions
 - ✅ **Clean, modern UI** inspired by SchoolHub-style dashboards
 
 ## 📋 What the App Includes
 
-- **Dashboard view** with navigation and metrics area
-- **Student entry form** separated from the student list
-- **Student table** showing all students in one place
-- **Search + course filter** working together
+- **Dashboard page** with navigation, metrics cards, student list, and add student form at bottom
+- **Students page** with full-width student table and management tools
+- **Sidebar navigation** for easy page switching (Dashboard, Students, Courses, Reports, Profile)
+- **Student entry form** integrated into the dashboard
+- **Student table** showing all students with search and filter capabilities
+- **Search + course filter** working together across pages
 - **Edit / delete actions** for each student
 - **Responsive design** for desktop and tablet use
 
@@ -56,9 +59,9 @@ A modern student dashboard with a clean layout, separated student form, and unif
 ```
 student-info-system/
 ├── frontend/
-│   ├── index.html       # Main HTML file for the dashboard
-│   ├── script.js        # Frontend JavaScript logic
-│   └── style.css        # Dashboard styling
+│   ├── index.html       # Main HTML file with multi-page layout
+│   ├── script.js        # Frontend JavaScript logic with page navigation
+│   └── style.css        # Dashboard styling with page transitions
 ├── src/
 │   ├── app.module.ts    # NestJS App Module
 │   ├── main.ts          # Application entry point
@@ -73,26 +76,36 @@ student-info-system/
 
 ## 🔧 How to Use
 
+### Navigation
+- Use the **sidebar menu** to navigate between pages
+- **Dashboard**: Overview with stats, student list, and add student form
+- **Students**: Dedicated page for comprehensive student management
+- Other pages (Courses, Reports, Profile) are placeholders for future features
+
 ### Add a Student
-1. Use the separated student form in the dashboard
-2. Fill in the required student fields
-3. Click **Add Student** to save
-4. The student appears in the unified list immediately
+1. Navigate to the **Dashboard** page
+2. Scroll to the bottom to find the **Add New Student** form
+3. Fill in all required student fields
+4. Click **Add Student** to save
+5. The student appears in both the dashboard list and students page immediately
 
 ### Search Students
-1. Type in the search input
-2. Results update in real-time across all fields
-3. Use this together with the course filter for better search
+1. Use the search bar in the top navigation
+2. Type to filter students in real-time across all fields
+3. Search works on both Dashboard and Students pages
+4. Combine with course filter for precise results
 
 ### Filter by Course
-1. Choose a course from the dropdown menu
+1. Choose a course from the dropdown menu on any page
 2. The student list updates to show only matching results
 3. Select **All Courses** to reset the filter
+4. Filter works independently on each page
 
-### Edit or Delete
-1. Use **Edit** to update student details
-2. Use **Delete** to remove a student
+### Edit or Delete Students
+1. Click **Edit** next to any student to update their details
+2. Click **Delete** to remove a student (with confirmation)
 3. Changes are saved automatically in localStorage
+4. Actions work on both Dashboard and Students pages
 
 ## 🛠️ Technologies Used
 
