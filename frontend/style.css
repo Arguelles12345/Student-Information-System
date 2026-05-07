@@ -200,6 +200,10 @@ body {
   display: flex;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* CONTENT AREA */
 .content-area {
   display: flex;
