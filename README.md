@@ -12,8 +12,10 @@ A modern student dashboard with multi-page navigation, featuring a comprehensive
 - ✅ **Sidebar Add Student button** that shows the fill-up form when clicked
 - ✅ **Dashboard page** with stats cards and student list
 - ✅ **Dedicated Students page** for full student management
+- ✅ **Functional Courses page** with course management and statistics
 - ✅ **Search bar** with real-time filtering across all pages
 - ✅ **Course dropdown** to filter students by course
+- ✅ **Department filter** for courses by department
 - ✅ **Unified table view** for all students and actions
 - ✅ **Clean, modern UI** inspired by SchoolHub-style dashboards
 
@@ -21,11 +23,14 @@ A modern student dashboard with multi-page navigation, featuring a comprehensive
 
 - **Dashboard page** with navigation, metrics cards, and student list
 - **Students page** with full-width student table and management tools
+- **Courses page** with course statistics, add course form, and course management
 - **Sidebar navigation** with an Add Student item to reveal the form
 - **Student entry form** hidden until Add Student is clicked
+- **Course entry form** for adding new courses with department selection
 - **Student table** showing all students with search and filter capabilities
+- **Course table** showing all courses with department filter and student counts
 - **Search + course filter** working together across pages
-- **Edit / delete actions** for each student
+- **Edit / delete actions** for each student and course
 - **Responsive design** for desktop and tablet use
 
 ## 🚀 Getting Started
@@ -81,7 +86,8 @@ student-info-system/
 - Use the **sidebar menu** to navigate between pages
 - **Dashboard**: Overview with stats, student list, and add student form
 - **Students**: Dedicated page for comprehensive student management
-- Other pages (Courses, Reports, Profile) are placeholders for future features
+- **Courses**: Course management with statistics and course administration
+- Other pages (Reports, Profile) are placeholders for future features
 
 ### Add a Student
 1. Click **Add Student** in the sidebar menu
@@ -89,6 +95,13 @@ student-info-system/
 3. Fill in all required student fields
 4. Click **Add Student** to save
 5. The student appears in both the dashboard list and students page immediately
+
+### Add a Course
+1. Navigate to the **Courses** page using the sidebar
+2. Use the **Add New Course** form on the left
+3. Fill in course code, name, department, credits, and description
+4. Click **Add Course** to save
+5. The course appears in the course list and updates statistics
 
 ### Search Students
 1. Use the search bar in the top navigation
@@ -102,11 +115,21 @@ student-info-system/
 3. Select **All Courses** to reset the filter
 4. Filter works independently on each page
 
+### Filter Courses by Department
+1. On the Courses page, use the department dropdown
+2. Select a department to show only courses from that department
+3. Select **All Departments** to reset the filter
+
 ### Edit or Delete Students
 1. Click **Edit** next to any student to update their details
 2. Click **Delete** to remove a student (with confirmation)
 3. Changes are saved automatically in localStorage
 4. Actions work on both Dashboard and Students pages
+
+### Edit or Delete Courses
+1. On the Courses page, click **Edit** next to any course
+2. Click **Delete** to remove a course (with confirmation)
+3. Course changes update student course filters automatically
 
 ## 🛠️ Technologies Used
 
