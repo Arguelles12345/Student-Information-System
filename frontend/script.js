@@ -7,6 +7,8 @@ const form = document.getElementById("studentForm");
 let allStudents = [];
 let allCourses = [];
 let currentPage = "dashboard";
+let sortColumn = "studentId";
+let sortDirection = "asc";
 
 function navigateTo(page) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -50,6 +52,7 @@ function initStudents() {
   } else {
     allStudents = [];
   }
+  updateSortIndicators();
   loadStudents();
   updateCourseFilters();
   updateStats();
@@ -75,6 +78,53 @@ function updateStats() {
   if (totalCoursesEl) totalCoursesEl.innerText = totalCourses;
   if (averageAgeEl) averageAgeEl.innerText = averageAge;
   if (totalRecordsEl) totalRecordsEl.innerText = totalRecords;
+}
+
+function sortStudents(column) {
+  if (sortColumn === column) {
+    sortDirection = sortDirection === "asc" ? "desc" : "asc";
+  } else {
+    sortColumn = column;
+    sortDirection = "asc";
+  }
+  
+  allStudents.sort((a, b) => {
+    let aVal = a[column];
+    let bVal = b[column];
+    
+    if (column === "age") {
+      aVal = parseInt(aVal, 10) || 0;
+      bVal = parseInt(bVal, 10) || 0;
+    } else {
+      aVal = String(aVal || "").toLowerCase();
+      bVal = String(bVal || "").toLowerCase();
+    }
+    
+    if (aVal < bVal) return sortDirection === "asc" ? -1 : 1;
+    if (aVal > bVal) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+  
+  updateSortIndicators();
+  loadStudents();
+}
+
+function updateSortIndicators() {
+  const columns = ["studentId", "name", "course", "email", "contactNumber"];
+  const columnIds = { studentId: "sortStudentId", name: "sortName", course: "sortCourse", email: "sortEmail", contactNumber: "sortContact" };
+  
+  columns.forEach(col => {
+    const span = document.getElementById(columnIds[col]);
+    const span2 = document.getElementById(columnIds[col] + "2");
+    if (sortColumn === col) {
+      const indicator = sortDirection === "asc" ? "▲" : "▼";
+      if (span) span.innerText = indicator;
+      if (span2) span2.innerText = indicator;
+    } else {
+      if (span) span.innerText = "";
+      if (span2) span2.innerText = "";
+    }
+  });
 }
 
 function loadStudents() {
@@ -106,6 +156,7 @@ async function deleteStudent(index) {
     allStudents.splice(index, 1);
     saveToStorage();
     loadStudents();
+    updateSortIndicators();
     updateCourseFilters();
     updateStats();
   }
@@ -195,6 +246,7 @@ form.addEventListener("submit", async (e) => {
   saveToStorage();
   form.reset();
   loadStudents();
+  updateSortIndicators();
   updateCourseFilters();
   updateStats();
   alert("✅ Student added successfully!");
@@ -239,6 +291,7 @@ document.getElementById("editForm").addEventListener("submit", async (e) => {
   saveToStorage();
   closeEditModal();
   loadStudents();
+  updateSortIndicators();
   updateCourseFilters();
   updateStats();
   alert("✅ Student updated successfully!");
